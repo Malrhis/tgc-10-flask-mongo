@@ -13,11 +13,35 @@ DB_NAME = 'sample_airbnb'
 # create the mongo client
 # to allow us to connect to the mongo db
 client = pymongo.MongoClient(MONGO_URI)
+db = client[DB_NAME]
 
 
-results = client[DB_NAME].listingsAndReviews.find().limit(20)
-for r in results:
-    print(r)
+@app.route('/')
+def show_listings():
+
+    # retrive the value of the input named country
+    country = request.args.get('country')
+    min_beds = request.args.get('min_beds')
+
+    criteria = {}
+
+    if country:
+        criteria['address.country'] = country
+
+    if min_beds:
+        criteria['beds'] = {
+            "$gte": int(min_beds)
+        }
+
+    listings = db.listingsAndReviews.find(criteria, {
+        'name': 1,
+        'summary': 1,
+        'images': 1,
+        'address': 1,
+        'beds': 1
+    }).limit(20)
+    return render_template('listings.template.html', listings=listings)
+
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
