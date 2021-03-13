@@ -22,6 +22,13 @@ def show_listings():
     # retrive the value of the input named country
     country = request.args.get('country')
     min_beds = request.args.get('min_beds')
+    page = request.args.get('page')
+
+    if page is None: 
+        page = 0
+    else:
+        # Convert page into an int because it all is an integer
+        page = int(page)
 
     criteria = {}
 
@@ -39,7 +46,7 @@ def show_listings():
         'images': 1,
         'address': 1,
         'beds': 1
-    }).limit(20)
+    }).skip(page*20).limit(20)
     return render_template('listings.template.html', listings=listings)
 
 
