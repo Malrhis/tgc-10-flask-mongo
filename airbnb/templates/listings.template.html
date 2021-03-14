@@ -18,27 +18,28 @@
         <h1>Fake Airbnb</h1>
         <form method="GET">
             <div>
-            <input type="text" name="country" class="form-control" placeholder="enter country to search by">
-            <input type="text" name="min_beds" class="form-control" placeholder="min number of beds">
+                <input type="text" name="country" class="form-control" placeholder="enter country to search by">
+                <input type="text" name="min_beds" class="form-control" placeholder="min number of beds">
             </div>
             <input type="submit" value="Search" class="btn btn-primary mt-3">
         </form>
-        <ul>
-            {%for listing in listings %}
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{listing.images.picture_url}}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{listing.name}}</h5>
-                    <h6>Country: {{listing.address.country}}</h6>
-                    <h6>Beds: {{listing.beds}}</h6>
-                    <p class="card-text">{{listing.summary}}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            {%endfor%}
-        </ul>
     </div>
-
+    <div class="container">
+        <div class="row">
+                {%for listing in listings %}
+                <div class="card col-md-4">
+                    <img class="card-img-top" src="{{listing.images.picture_url}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{listing.name}}</h5>
+                        <h6>Country: {{listing.address.country}}</h6>
+                        <h6>Beds: {{listing.beds}}</h6>
+                        <p class="card-text">{{listing.summary}}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                {%endfor%}
+        </div>
+    </div>
 
 
     <!-- Optional JavaScript; choose one of the two! -->
