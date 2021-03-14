@@ -24,20 +24,28 @@
             <input type="submit" value="Search" class="btn btn-primary mt-3">
         </form>
     </div>
+
+    <div class="container my-3">
+        {% if page != 0 %}
+        <a href="?page={{page-1}}" class="btn btn-primary mx-3">Previous Page</a>
+        {% endif %}
+        <a href="?page={{page+1}}" class="btn btn-primary mx-3">Next Page</a>
+    </div>
+
     <div class="container">
         <div class="row">
-                {%for listing in listings %}
-                <div class="card col-md-4">
-                    <img class="card-img-top" src="{{listing.images.picture_url}}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">{{listing.name}}</h5>
-                        <h6>Country: {{listing.address.country}}</h6>
-                        <h6>Beds: {{listing.beds}}</h6>
-                        <p class="card-text">{{listing.summary}}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+            {%for listing in listings %}
+            <div class="card col-md-4">
+                <img class="card-img-top" src="{{listing.images.picture_url}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{listing.name}}</h5>
+                    <h6>Country: {{listing.address.country}}</h6>
+                    <h6>Beds: {{listing.beds}}</h6>
+                    <p class="card-text">{{listing.summary}}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
-                {%endfor%}
+            </div>
+            {%endfor%}
         </div>
     </div>
 

@@ -24,7 +24,8 @@ def show_listings():
     min_beds = request.args.get('min_beds')
     page = request.args.get('page')
 
-    if page is None: 
+    # if page is empty convert it to zero
+    if page is None:
         page = 0
     else:
         # Convert page into an int because it all is an integer
@@ -47,7 +48,11 @@ def show_listings():
         'address': 1,
         'beds': 1
     }).skip(page*20).limit(20)
-    return render_template('listings.template.html', listings=listings)
+
+    # for rendering in the front end
+    return render_template('listings.template.html',
+                           listings=listings, page=page,
+                           fullpath=request.full_path)
 
 
 # "magic code" -- boilerplate
