@@ -13,6 +13,10 @@ DB_NAME = 'tgc10_new_shelter'
 client = pymongo.MongoClient(MONGO_URI)
 db = client[DB_NAME]
 
+@app.route('/animals/create')
+def show_create_animals():
+    return
+
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
